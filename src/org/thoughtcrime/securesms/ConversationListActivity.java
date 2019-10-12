@@ -67,6 +67,7 @@ import java.util.List;
 public class ConversationListActivity extends PassphraseRequiredActionBarActivity
     implements ConversationListFragment.ConversationSelectedListener
 {
+
   @SuppressWarnings("unused")
   private static final String TAG = ConversationListActivity.class.getSimpleName();
 
@@ -208,6 +209,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     case R.id.menu_mark_all_read:     handleMarkAllRead();     return true;
     case R.id.menu_invite:            handleInvite();          return true;
     case R.id.menu_help:              handleHelp();            return true;
+    case R.id.menu_logout:            handleLogout();          return true;
     }
 
     return false;
@@ -287,5 +289,10 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     } catch (ActivityNotFoundException e) {
       Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
     }
+  }
+  private void handleLogout() {
+    Intent intent = new Intent(this, RegistrationActivity.class);
+    intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true);
+    this.startActivity(intent);
   }
 }
