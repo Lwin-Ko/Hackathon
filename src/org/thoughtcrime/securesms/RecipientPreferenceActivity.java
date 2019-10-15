@@ -221,7 +221,7 @@ public class RecipientPreferenceActivity extends PassphraseRequiredActionBarActi
     else                      this.avatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
     this.avatar.setBackgroundColor(recipient.getColor().toActionBarColor(this));
-    this.toolbarLayout.setTitle(recipient.toShortString());
+    this.toolbarLayout.setTitle(recipient.getProfileName());
     this.toolbarLayout.setContentScrimColor(recipient.getColor().toActionBarColor(this));
   }
 

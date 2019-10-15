@@ -752,24 +752,24 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
   public boolean onOptionsItemSelected(MenuItem item) {
     super.onOptionsItemSelected(item);
     switch (item.getItemId()) {
-    case R.id.menu_call_secure:               handleDial(getRecipient(), true);                  return true;
-    case R.id.menu_call_insecure:             handleDial(getRecipient(), false);                 return true;
-    case R.id.menu_view_media:                handleViewMedia();                                 return true;
+//    case R.id.menu_call_secure:               handleDial(getRecipient(), true);                  return true;
+//    case R.id.menu_call_insecure:             handleDial(getRecipient(), false);                 return true;
+//    case R.id.menu_view_media:                handleViewMedia();                                 return true;
     case R.id.menu_add_shortcut:              handleAddShortcut();                               return true;
     case R.id.menu_search:                    handleSearch();                                    return true;
     case R.id.menu_add_to_contacts:           handleAddToContacts();                             return true;
-    case R.id.menu_reset_secure_session:      handleResetSecureSession();                        return true;
+//    case R.id.menu_reset_secure_session:      handleResetSecureSession();                        return true;
     case R.id.menu_group_recipients:          handleDisplayGroupRecipients();                    return true;
     case R.id.menu_distribution_broadcast:    handleDistributionBroadcastEnabled(item);          return true;
     case R.id.menu_distribution_conversation: handleDistributionConversationEnabled(item);       return true;
     case R.id.menu_edit_group:                handleEditPushGroup();                             return true;
     case R.id.menu_leave:                     handleLeavePushGroup();                            return true;
     case R.id.menu_invite:                    handleInviteLink();                                return true;
-    case R.id.menu_mute_notifications:        handleMuteNotifications();                         return true;
-    case R.id.menu_unmute_notifications:      handleUnmuteNotifications();                       return true;
+//    case R.id.menu_mute_notifications:        handleMuteNotifications();                         return true;
+//    case R.id.menu_unmute_notifications:      handleUnmuteNotifications();                       return true;
     case R.id.menu_conversation_settings:     handleConversationSettings();                      return true;
-    case R.id.menu_expiring_messages_off:
-    case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
+//    case R.id.menu_expiring_messages_off:
+//    case R.id.menu_expiring_messages:         handleSelectMessageExpiration();                   return true;
     case android.R.id.home:                   handleReturnToConversationList();                  return true;
     }
 
@@ -852,7 +852,6 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     intent.putExtra(RecipientPreferenceActivity.RECIPIENT_ID, recipient.getId());
     intent.putExtra(RecipientPreferenceActivity.CAN_HAVE_SAFETY_NUMBER_EXTRA,
                     isSecureText && !isSelfConversation());
-
     startActivitySceneTransition(intent, titleView.findViewById(R.id.contact_photo_image), "avatar");
   }
 

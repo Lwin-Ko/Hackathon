@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 
 import android.text.TextUtils;
 
+import com.google.android.exoplayer2.extractor.ts.TsExtractor;
+
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteDatabaseHook;
 import net.sqlcipher.database.SQLiteOpenHelper;
@@ -493,6 +495,11 @@ public class SQLCipherOpenHelper extends SQLiteOpenHelper {
         db.execSQL("ALTER TABLE recipient ADD COLUMN system_phone_type INTEGER DEFAULT -1");
 
         String localNumber = TextSecurePreferences.getLocalNumber(context);
+        String specialization = TextSecurePreferences.getProfileSpecialization(context);
+        String experience = TextSecurePreferences.getProfileExp(context);
+        String clinic = TextSecurePreferences.getProfileClinic(context);
+        String degree = TextSecurePreferences.getProfileDegree(context);
+
         if (!TextUtils.isEmpty(localNumber)) {
           try (Cursor cursor = db.query("recipient", null, "phone = ?", new String[] { localNumber }, null, null, null)) {
             if (cursor == null || !cursor.moveToFirst()) {
@@ -501,10 +508,15 @@ public class SQLCipherOpenHelper extends SQLiteOpenHelper {
               values.put("registered", 1);
               values.put("profile_sharing", 1);
               values.put("signal_profile_name", TextSecurePreferences.getProfileName(context));
+              values.put("profile_specialization", specialization);
+              values.put("profile_experience", experience);
+              values.put("profile_degree",degree);
+              values.put("profile_clinic",clinic);
+
               db.insert("recipient", null, values);
             } else {
-              db.execSQL("UPDATE recipient SET registered = ?, profile_sharing = ?, signal_profile_name = ? WHERE phone = ?",
-                         new String[] { "1", "1", TextSecurePreferences.getProfileName(context), localNumber });
+              db.execSQL("UPDATE recipient SET registered = ?, profile_sharing = ?, signal_profile_name = ?, profile_specialization = ?, profile_experience = ?, profile_degree = ?, profile_clinic = ? WHERE phone = ?",
+                         new String[] { "1", "1", TextSecurePreferences.getProfileName(context), specialization, experience, degree, clinic ,localNumber });
             }
           }
         }

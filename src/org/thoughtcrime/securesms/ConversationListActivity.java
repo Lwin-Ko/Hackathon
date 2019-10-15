@@ -127,7 +127,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
 
     inflater.inflate(R.menu.text_secure_normal, menu);
 
-    menu.findItem(R.id.menu_clear_passphrase).setVisible(!TextSecurePreferences.isPasswordDisabled(this));
+//    menu.findItem(R.id.menu_clear_passphrase).setVisible(!TextSecurePreferences.isPasswordDisabled(this));
 
     super.onPrepareOptionsMenu(menu);
     return true;
@@ -203,12 +203,13 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     super.onOptionsItemSelected(item);
 
     switch (item.getItemId()) {
+
     case R.id.menu_new_group:         createGroup();           return true;
     case R.id.menu_settings:          handleDisplaySettings(); return true;
-    case R.id.menu_clear_passphrase:  handleClearPassphrase(); return true;
-    case R.id.menu_mark_all_read:     handleMarkAllRead();     return true;
+//    case R.id.menu_clear_passphrase:  handleClearPassphrase(); return true;
+//    case R.id.menu_mark_all_read:     handleMarkAllRead();     return true;
     case R.id.menu_invite:            handleInvite();          return true;
-    case R.id.menu_help:              handleHelp();            return true;
+//    case R.id.menu_help:              handleHelp();            return true;
     case R.id.menu_logout:            handleLogout();          return true;
     }
 
@@ -247,6 +248,8 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     else                           super.onBackPressed();
   }
 
+
+
   private void createGroup() {
     Intent intent = new Intent(this, GroupCreateActivity.class);
     startActivity(intent);
@@ -257,39 +260,39 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     startActivity(preferencesIntent);
   }
 
-  private void handleClearPassphrase() {
-    Intent intent = new Intent(this, KeyCachingService.class);
-    intent.setAction(KeyCachingService.CLEAR_KEY_ACTION);
-    startService(intent);
-  }
+//  private void handleClearPassphrase() {
+//    Intent intent = new Intent(this, KeyCachingService.class);
+//    intent.setAction(KeyCachingService.CLEAR_KEY_ACTION);
+//    startService(intent);
+//  }
 
   @SuppressLint("StaticFieldLeak")
-  private void handleMarkAllRead() {
-    new AsyncTask<Void, Void, Void>() {
-      @Override
-      protected Void doInBackground(Void... params) {
-        Context                 context    = ConversationListActivity.this;
-        List<MarkedMessageInfo> messageIds = DatabaseFactory.getThreadDatabase(context).setAllThreadsRead();
-
-        MessageNotifier.updateNotification(context);
-        MarkReadReceiver.process(context, messageIds);
-
-        return null;
-      }
-    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-  }
+//  private void handleMarkAllRead() {
+//    new AsyncTask<Void, Void, Void>() {
+//      @Override
+//      protected Void doInBackground(Void... params) {
+//        Context                 context    = ConversationListActivity.this;
+//        List<MarkedMessageInfo> messageIds = DatabaseFactory.getThreadDatabase(context).setAllThreadsRead();
+//
+//        MessageNotifier.updateNotification(context);
+//        MarkReadReceiver.process(context, messageIds);
+//
+//        return null;
+//      }
+//    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//  }
 
   private void handleInvite() {
     startActivity(new Intent(this, InviteActivity.class));
   }
 
-  private void handleHelp() {
-    try {
-      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.signal.org")));
-    } catch (ActivityNotFoundException e) {
-      Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
-    }
-  }
+//  private void handleHelp() {
+//    try {
+//      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.signal.org")));
+//    } catch (ActivityNotFoundException e) {
+//      Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
+//    }
+//  }
   private void handleLogout() {
     Intent intent = new Intent(this, RegistrationActivity.class);
     intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true);

@@ -119,6 +119,11 @@ public class TextSecurePreferences {
   private static final String ALWAYS_RELAY_CALLS_PREF          = "pref_turn_only";
   private static final String PROFILE_KEY_PREF                 = "pref_profile_key";
   private static final String PROFILE_NAME_PREF                = "pref_profile_name";
+  private static final String PROFILE_SPECIALIZATION_PREF      = "pref_profile_specialization";
+  private static final String PROFILE_DEGREE_PREF              = "pref_profile_degree";
+  private static final String PROFILE_EXPERIENCE_PREF          = "pref_profile_exp";
+  private static final String PROFILE_CLINIC_PREF              = "pref_profile_clinic";
+
   private static final String PROFILE_AVATAR_ID_PREF           = "pref_profile_avatar_id";
   public  static final String READ_RECEIPTS_PREF               = "pref_read_receipts";
   public  static final String INCOGNITO_KEYBORAD_PREF          = "pref_incognito_keyboard";
@@ -402,6 +407,37 @@ public class TextSecurePreferences {
 
   public static String getProfileName(Context context) {
     return getStringPreference(context, PROFILE_NAME_PREF, null);
+  }
+
+  public static void setProfileSpecialization(Context context, String specialization) {
+    setStringPreference(context, PROFILE_SPECIALIZATION_PREF, specialization);
+  }
+
+  public static String getProfileSpecialization(Context context) {
+    return getStringPreference(context, PROFILE_SPECIALIZATION_PREF, null);
+  }
+
+  public static void setProfileDegree(Context context, String degree) {
+    setStringPreference(context, PROFILE_DEGREE_PREF, degree);
+  }
+
+  public static String getProfileDegree(Context context) {
+    return getStringPreference(context, PROFILE_DEGREE_PREF, null);
+  }
+
+  public static void setProfileExp(Context context, String exp) {
+    setStringPreference(context, PROFILE_EXPERIENCE_PREF, exp);
+  }
+
+  public static String getProfileExp(Context context) {
+    return getStringPreference(context, PROFILE_EXPERIENCE_PREF, null);
+  }
+  public static void setProfileClinic(Context context, String clinic) {
+    setStringPreference(context, PROFILE_CLINIC_PREF, clinic);
+  }
+
+  public static String getProfileClinic(Context context) {
+    return getStringPreference(context, PROFILE_CLINIC_PREF, null);
   }
 
   public static void setProfileAvatarId(Context context, int id) {

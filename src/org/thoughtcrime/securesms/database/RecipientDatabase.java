@@ -474,6 +474,13 @@ public class RecipientDatabase extends Database {
     Recipient.live(id).refresh();
   }
 
+  public void setProfileSpecialization(@NonNull RecipientId id, @Nullable String profileSpecialization) {
+    ContentValues contentValues = new ContentValues(1);
+    contentValues.put(SIGNAL_PROFILE_NAME, profileSpecialization);
+    update(id, contentValues);
+    Recipient.live(id).refresh();
+  }
+
   public void setProfileAvatar(@NonNull RecipientId id, @Nullable String profileAvatar) {
     ContentValues contentValues = new ContentValues(1);
     contentValues.put(SIGNAL_PROFILE_AVATAR, profileAvatar);

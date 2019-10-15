@@ -81,7 +81,7 @@ public class CreateProfileActivity extends BaseActionBarActivity {
   private InputAwareLayout       container;
   private ImageView              avatar;
   private CircularProgressButton finishButton;
-  private LabeledEditText        name;
+  private LabeledEditText        name,degree,specialization,experience,clinic;
   private EmojiToggle            emojiToggle;
   private MediaKeyboard          mediaKeyboard;
   private View                   reveal;
@@ -104,6 +104,10 @@ public class CreateProfileActivity extends BaseActionBarActivity {
     initializeResources();
     initializeEmojiInput();
     initializeProfileName(getIntent().getBooleanExtra(EXCLUDE_SYSTEM, false));
+    initializeProfileSpecialization(getIntent().getBooleanExtra(EXCLUDE_SYSTEM, false));
+    initializeProfileExperience(getIntent().getBooleanExtra(EXCLUDE_SYSTEM, false));
+    initializeProfileDegree(getIntent().getBooleanExtra(EXCLUDE_SYSTEM, false));
+    initializeProfileClinic(getIntent().getBooleanExtra(EXCLUDE_SYSTEM, false));
     initializeProfileAvatar(getIntent().getBooleanExtra(EXCLUDE_SYSTEM, false));
   }
 
@@ -196,6 +200,10 @@ public class CreateProfileActivity extends BaseActionBarActivity {
 
     this.avatar       = ViewUtil.findById(this, R.id.avatar);
     this.name         = ViewUtil.findById(this, R.id.name);
+    this.degree       =ViewUtil.findById(this,R.id.degree);
+    this.specialization=ViewUtil.findById(this,R.id.specialization);
+    this.clinic       =ViewUtil.findById(this,R.id.clinic);
+    this.experience   =ViewUtil.findById(this,R.id.experience);
     this.emojiToggle  = ViewUtil.findById(this, R.id.emoji_toggle);
     this.mediaKeyboard = ViewUtil.findById(this, R.id.emoji_drawer);
     this.container    = ViewUtil.findById(this, R.id.container);
@@ -226,6 +234,74 @@ public class CreateProfileActivity extends BaseActionBarActivity {
       }
     });
 
+    this.specialization.getInput().addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {}
+      @Override
+      public void afterTextChanged(Editable s) {
+        if (s.toString().getBytes().length > ProfileCipher.NAME_PADDED_LENGTH) {
+          specialization.getInput().setError(getString(R.string.CreateProfileActivity_too_long));
+          finishButton.setEnabled(false);
+        } else if (specialization.getInput().getError() != null || !finishButton.isEnabled()) {
+          specialization.getInput().setError(null);
+          finishButton.setEnabled(true);
+        }
+      }
+    });
+
+    this.degree.getInput().addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {}
+      @Override
+      public void afterTextChanged(Editable s) {
+        if (s.toString().getBytes().length > ProfileCipher.NAME_PADDED_LENGTH) {
+          degree.getInput().setError(getString(R.string.CreateProfileActivity_too_long));
+          finishButton.setEnabled(false);
+        } else if (degree.getInput().getError() != null || !finishButton.isEnabled()) {
+          degree.getInput().setError(null);
+          finishButton.setEnabled(true);
+        }
+      }
+    });
+
+    this.experience.getInput().addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {}
+      @Override
+      public void afterTextChanged(Editable s) {
+        if (s.toString().getBytes().length > ProfileCipher.NAME_PADDED_LENGTH) {
+          experience.getInput().setError(getString(R.string.CreateProfileActivity_too_long));
+          finishButton.setEnabled(false);
+        } else if (experience.getInput().getError() != null || !finishButton.isEnabled()) {
+          experience.getInput().setError(null);
+          finishButton.setEnabled(true);
+        }
+      }
+    });
+
+    this.clinic.getInput().addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {}
+      @Override
+      public void afterTextChanged(Editable s) {
+        if (s.toString().getBytes().length > ProfileCipher.NAME_PADDED_LENGTH) {
+          clinic.getInput().setError(getString(R.string.CreateProfileActivity_too_long));
+          finishButton.setEnabled(false);
+        } else if (clinic.getInput().getError() != null || !finishButton.isEnabled()) {
+          clinic.getInput().setError(null);
+          finishButton.setEnabled(true);
+        }
+      }
+    });
+
     this.finishButton.setOnClickListener(view -> {
       this.finishButton.setIndeterminateProgressMode(true);
       this.finishButton.setProgress(50);
@@ -251,6 +327,102 @@ public class CreateProfileActivity extends BaseActionBarActivity {
           if (!TextUtils.isEmpty(result)) {
             name.setText(result);
             name.getInput().setSelection(result.length(), result.length());
+          }
+        }
+
+        @Override
+        public void onFailure(ExecutionException e) {
+          Log.w(TAG, e);
+        }
+      });
+    }
+  }
+
+  private void initializeProfileSpecialization(boolean excludeSystem) {
+    if (!TextUtils.isEmpty(TextSecurePreferences.getProfileName(this))) {
+      String profileName = TextSecurePreferences.getProfileName(this);
+
+      specialization.setText(profileName);
+      specialization.getInput().setSelection(profileName.length(), profileName.length());
+    } else if (!excludeSystem) {
+      SystemProfileUtil.getSystemProfileName(this).addListener(new ListenableFuture.Listener<String>() {
+        @Override
+        public void onSuccess(String result) {
+          if (!TextUtils.isEmpty(result)) {
+            specialization.setText(result);
+            specialization.getInput().setSelection(result.length(), result.length());
+          }
+        }
+
+        @Override
+        public void onFailure(ExecutionException e) {
+          Log.w(TAG, e);
+        }
+      });
+    }
+  }
+
+  private void initializeProfileDegree(boolean excludeSystem) {
+    if (!TextUtils.isEmpty(TextSecurePreferences.getProfileName(this))) {
+      String profileName = TextSecurePreferences.getProfileName(this);
+
+      degree.setText(profileName);
+      degree.getInput().setSelection(profileName.length(), profileName.length());
+    } else if (!excludeSystem) {
+      SystemProfileUtil.getSystemProfileName(this).addListener(new ListenableFuture.Listener<String>() {
+        @Override
+        public void onSuccess(String result) {
+          if (!TextUtils.isEmpty(result)) {
+            degree.setText(result);
+            degree.getInput().setSelection(result.length(), result.length());
+          }
+        }
+
+        @Override
+        public void onFailure(ExecutionException e) {
+          Log.w(TAG, e);
+        }
+      });
+    }
+  }
+
+  private void initializeProfileExperience(boolean excludeSystem) {
+    if (!TextUtils.isEmpty(TextSecurePreferences.getProfileName(this))) {
+      String profileName = TextSecurePreferences.getProfileName(this);
+
+      experience.setText(profileName);
+      experience.getInput().setSelection(profileName.length(), profileName.length());
+    } else if (!excludeSystem) {
+      SystemProfileUtil.getSystemProfileName(this).addListener(new ListenableFuture.Listener<String>() {
+        @Override
+        public void onSuccess(String result) {
+          if (!TextUtils.isEmpty(result)) {
+            experience.setText(result);
+            experience.getInput().setSelection(result.length(), result.length());
+          }
+        }
+
+        @Override
+        public void onFailure(ExecutionException e) {
+          Log.w(TAG, e);
+        }
+      });
+    }
+  }
+
+  private void initializeProfileClinic(boolean excludeSystem) {
+    if (!TextUtils.isEmpty(TextSecurePreferences.getProfileName(this))) {
+      String profileName = TextSecurePreferences.getProfileName(this);
+
+      clinic.setText(profileName);
+      clinic.getInput().setSelection(profileName.length(), profileName.length());
+    } else if (!excludeSystem) {
+      SystemProfileUtil.getSystemProfileName(this).addListener(new ListenableFuture.Listener<String>() {
+        @Override
+        public void onSuccess(String result) {
+          if (!TextUtils.isEmpty(result)) {
+            clinic.setText(result);
+            clinic.getInput().setSelection(result.length(), result.length());
           }
         }
 
@@ -345,11 +517,23 @@ public class CreateProfileActivity extends BaseActionBarActivity {
   }
 
   private void handleUpload() {
-    final String        name;
+    final String        name,specialization,degree,experience,clinic;
     final StreamDetails avatar;
 
     if (TextUtils.isEmpty(this.name.getText().toString())) name = null;
     else                                                   name = this.name.getText().toString();
+
+    if (TextUtils.isEmpty(this.specialization.getText().toString())) specialization = null;
+    else                                                   specialization = this.specialization.getText().toString();
+
+    if (TextUtils.isEmpty(this.degree.getText().toString())) degree = null;
+    else                                                   degree = this.degree.getText().toString();
+
+    if (TextUtils.isEmpty(this.clinic.getText().toString())) clinic = null;
+    else                                                   clinic = this.clinic.getText().toString();
+
+    if (TextUtils.isEmpty(this.experience.getText().toString())) experience = null;
+    else                                                   experience = this.experience.getText().toString();
 
     if (avatarBytes == null || avatarBytes.length == 0) avatar = null;
     else                                                avatar = new StreamDetails(new ByteArrayInputStream(avatarBytes),
@@ -365,6 +549,8 @@ public class CreateProfileActivity extends BaseActionBarActivity {
         try {
           accountManager.setProfileName(profileKey, name);
           TextSecurePreferences.setProfileName(context, name);
+          TextSecurePreferences.setProfileSpecialization(context,specialization);
+
           DatabaseFactory.getRecipientDatabase(context).setProfileName(Recipient.self().getId(), name);
         } catch (IOException e) {
           Log.w(TAG, e);

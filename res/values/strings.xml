@@ -303,6 +303,10 @@
     <string name="CreateProfileActivity_profile_photo">Profile photo</string>
     <string name="CreateProfileActivity_too_long">Too long</string>
     <string name="CreateProfileActivity_profile_name">Profile Name</string>
+    <string name="CreateProfileActivity_special">Specialization</string>
+    <string name="CreateProfileActivity_exp">Experience</string>
+    <string name="CreateProfileActivity_degree">Degree</string>
+    <string name="CreateProfileActivity_clinic">Clinic</string>
     <string name="CreateProfileActivity_set_up_your_profile">Set up your profile</string>
     <string name="CreateProfileActivity_signal_profiles_are_end_to_end_encrypted">Signal profiles are end-to-end encrypted, and the Signal service never has access to this information.</string>
     <string name="CreateProfileActivity_set_avatar_description">Set avatar</string>
@@ -1158,6 +1162,10 @@
     <string name="profile_create_activity__finish">FINISH</string>
     <string name="profile_create_activity__who_can_see_this_information">Who can see this information?</string>
     <string name="profile_create_activity__your_name">Your name</string>
+    <string name="profile_create_activity__your_degree">Your Degree</string>
+    <string name="profile_create_activity__special">Your Specialization</string>
+    <string name="profile_create_activity__exp">Your Experience</string>
+    <string name="profile_create_activity__clinic">Clinic</string>
 
     <!-- recipient_preferences_activity -->
     <string name="recipient_preference_activity__shared_media">Shared media</string>

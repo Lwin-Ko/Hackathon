@@ -7,7 +7,7 @@
     android:layout_height="fill_parent"
     android:background="@color/white"
     android:fillViewport="true"
-    tools:context=".RegistrationActivity">
+    tools:context=". ">
 
     <RelativeLayout
         android:layout_width="match_parent"
