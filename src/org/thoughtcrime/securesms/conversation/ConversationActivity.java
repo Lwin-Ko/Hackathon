@@ -684,8 +684,8 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     }
 
     if (recipient != null && recipient.get().isLocalNumber()) {
-      if (isSecureText) menu.findItem(R.id.menu_call_secure).setVisible(false);
-      else              menu.findItem(R.id.menu_call_insecure).setVisible(false);
+//      if (isSecureText) menu.findItem(R.id.menu_call_secure).setVisible(false);
+      if(!isSecureText)   menu.findItem(R.id.menu_call_insecure).setVisible(false);
 
       MenuItem muteItem = menu.findItem(R.id.menu_mute_notifications);
 
@@ -753,9 +753,9 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     super.onOptionsItemSelected(item);
     switch (item.getItemId()) {
 //    case R.id.menu_call_secure:               handleDial(getRecipient(), true);                  return true;
-//    case R.id.menu_call_insecure:             handleDial(getRecipient(), false);                 return true;
+    case R.id.menu_call_insecure:             handleDial(getRecipient(), false);                 return true;
 //    case R.id.menu_view_media:                handleViewMedia();                                 return true;
-    case R.id.menu_add_shortcut:              handleAddShortcut();                               return true;
+//    case R.id.menu_add_shortcut:              handleAddShortcut();                               return true;
     case R.id.menu_search:                    handleSearch();                                    return true;
     case R.id.menu_add_to_contacts:           handleAddToContacts();                             return true;
 //    case R.id.menu_reset_secure_session:      handleResetSecureSession();                        return true;
