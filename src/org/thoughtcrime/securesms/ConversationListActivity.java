@@ -208,7 +208,7 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
     case R.id.menu_settings:          handleDisplaySettings(); return true;
 //    case R.id.menu_clear_passphrase:  handleClearPassphrase(); return true;
 //    case R.id.menu_mark_all_read:     handleMarkAllRead();     return true;
-    case R.id.menu_invite:            handleInvite();          return true;
+//    case R.id.menu_invite:            handleInvite();          return true;
 //    case R.id.menu_help:              handleHelp();            return true;
     case R.id.menu_logout:            handleLogout();          return true;
     }
@@ -282,17 +282,17 @@ public class ConversationListActivity extends PassphraseRequiredActionBarActivit
 //    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 //  }
 
-  private void handleInvite() {
-    startActivity(new Intent(this, InviteActivity.class));
-  }
-
-//  private void handleHelp() {
-//    try {
-//      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.signal.org")));
-//    } catch (ActivityNotFoundException e) {
-//      Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
-//    }
+//  private void handleInvite() {
+//    startActivity(new Intent(this, InviteActivity.class));
 //  }
+
+  private void handleHelp() {
+    try {
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.signal.org")));
+    } catch (ActivityNotFoundException e) {
+      Toast.makeText(this, R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
+    }
+  }
   private void handleLogout() {
     Intent intent = new Intent(this, RegistrationActivity.class);
     intent.putExtra(RegistrationActivity.RE_REGISTRATION_EXTRA, true);

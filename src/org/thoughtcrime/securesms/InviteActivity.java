@@ -82,7 +82,7 @@ public class InviteActivity extends PassphraseRequiredActionBarActivity implemen
       heart.getViewTreeObserver().addOnPreDrawListener(new HeartPreDrawListener());
     }
     contactsFragment.setOnContactSelectedListener(this);
-//    shareButton.setOnClickListener(new ShareClickListener());
+    shareButton.setOnClickListener(new ShareClickListener());
     smsButton.setOnClickListener(new SmsClickListener());
     smsCancelButton.setOnClickListener(new SmsCancelClickListener());
     smsSendButton.setOnClickListener(new SmsSendClickListener());
@@ -134,20 +134,20 @@ public class InviteActivity extends PassphraseRequiredActionBarActivity implemen
     ViewUtil.animateOut(smsSendFrame, slideOutAnimation, View.GONE);
   }
 
-//  private class ShareClickListener implements OnClickListener {
-//    @Override
-//    public void onClick(View v) {
-//      Intent sendIntent = new Intent();
-//      sendIntent.setAction(Intent.ACTION_SEND);
-//      sendIntent.putExtra(Intent.EXTRA_TEXT, inviteText.getText().toString());
-//      sendIntent.setType("text/plain");
-//      if (sendIntent.resolveActivity(getPackageManager()) != null) {
-//        startActivity(Intent.createChooser(sendIntent, getString(R.string.InviteActivity_invite_to_signal)));
-//      } else {
-//        Toast.makeText(InviteActivity.this, R.string.InviteActivity_no_app_to_share_to, Toast.LENGTH_LONG).show();
-//      }
-//    }
-//  }
+  private class ShareClickListener implements OnClickListener {
+    @Override
+    public void onClick(View v) {
+      Intent sendIntent = new Intent();
+      sendIntent.setAction(Intent.ACTION_SEND);
+      sendIntent.putExtra(Intent.EXTRA_TEXT, inviteText.getText().toString());
+      sendIntent.setType("text/plain");
+      if (sendIntent.resolveActivity(getPackageManager()) != null) {
+        startActivity(Intent.createChooser(sendIntent, getString(R.string.InviteActivity_invite_to_signal)));
+      } else {
+        Toast.makeText(InviteActivity.this, R.string.InviteActivity_no_app_to_share_to, Toast.LENGTH_LONG).show();
+      }
+    }
+  }
 
   private class SmsClickListener implements OnClickListener {
     @Override
