@@ -104,11 +104,7 @@ public class ConversationListFragment extends Fragment
   @SuppressWarnings("unused")
   private static final String TAG = ConversationListFragment.class.getSimpleName();
 
-  private static final int[] EMPTY_IMAGES = new int[] { R.drawable.empty_inbox_1,
-                                                        R.drawable.empty_inbox_2,
-                                                        R.drawable.empty_inbox_3,
-                                                        R.drawable.empty_inbox_4,
-                                                        R.drawable.empty_inbox_5 };
+  private static final int[] EMPTY_IMAGES = new int[] { R.drawable.empty_inbox_1};
 
   private ActionMode                  actionMode;
   private RecyclerView                list;
